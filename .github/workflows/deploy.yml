@@ -32,4 +32,4 @@ jobs:
       - name: Restart AI MemoAI service
         run: |
           ssh -i deploy_key -o StrictHostKeyChecking=no $USER@$HOST \
-            "sudo systemctl restart memoai"
+            "sudo systemctl restart memoAI.service"
