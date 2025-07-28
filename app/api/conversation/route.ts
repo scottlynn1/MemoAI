@@ -85,7 +85,7 @@ export async function POST(req: NextRequest) {
     const record = await createConversationRecord(dbInput);
 
     // Generate the permalink using the database-generated ID
-    const permalink = `${process.env.NEXT_PUBLIC_BASE_URL}/c/${record.id}`;
+    const permalink = `${process.env.NEXT_PUBLIC_BASE_URL}/conversation/${record.id}`;
 
     return NextResponse.json(
       { url: permalink },
