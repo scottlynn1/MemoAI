@@ -10,7 +10,7 @@ export async function parseMeta(html: string): Promise<Conversation> {
   const styles = $('head style').toString();
   const links = $('head link').toString();
   const head = `<head>${styles}${links}</head>`;
-  const input = $('[role="textbox"]');
+  const input = $('div[role="textbox"]');
   const topDiv = input.parents('div').last();
   const convoDiv = topDiv.prev();
   // const divs = $('div.x78zum5.xdt5ytf.x1na6gtj.xz9dl7a.xsag5q8.xh8yej3').toString();
