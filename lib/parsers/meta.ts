@@ -11,9 +11,10 @@ export async function parseMeta(html: string): Promise<Conversation> {
   const links = $('head link').toString();
   const head = `<head>${styles}${links}</head>`;
   let input = $('div[role="textbox"]');
-  let sibling = null;
-  while (!sibling) {
+  let sibling = {length: 0};
+  while (!sibling.length) {
     input = input.parent('div')
+    console.log(input.length, input.toString());
     sibling = input.prev();
     console.log(sibling);
   }
