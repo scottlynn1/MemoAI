@@ -14,13 +14,9 @@ export async function parseMeta(html: string): Promise<Conversation> {
   let sibling = {length: 0};
   while (!sibling.length) {
     input = input.parent('div')
-    console.log(input.length, input.toString());
     sibling = input.prev();
-    console.log(sibling);
   }
   const convo = sibling.toString();
-  console.log('convo', convo.length, convo);
-  // const divs = $('div.x78zum5.xdt5ytf.x1na6gtj.xz9dl7a.xsag5q8.xh8yej3').toString();
   const conversation = '<html class="_9dls _asb0 __fb-light-mode" lang="en" dir="ltr">' + head + convo + '</html>';
   return {
     model: 'Meta',
