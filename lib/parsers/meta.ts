@@ -8,7 +8,8 @@ import * as cheerio from 'cheerio';
 export async function parseMeta(html: string): Promise<Conversation> {
   const $ = cheerio.load(html);
   const styles = $('head style').toString();
-  const head = `<head>${styles}</head>`;
+  const links = $('head link').toString();
+  const head = `<head>${styles}${links}</head>`;
   const divs = $('div.x78zum5.xdt5ytf.x1na6gtj.xz9dl7a.xsag5q8.xh8yej3').toString();
   const conversation = '<html class="_9dls _asb0 __fb-light-mode" lang="en" dir="ltr">' + head + divs + '</html>';
   return {
