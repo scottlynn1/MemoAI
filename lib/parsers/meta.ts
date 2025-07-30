@@ -15,6 +15,7 @@ export async function parseMeta(html: string): Promise<Conversation> {
   while (!sibling) {
     input = input.parent('div')
     sibling = input.prev();
+    console.log(sibling);
   }
   const convo = sibling.toString();
   console.log('convo', convo.length, convo);
