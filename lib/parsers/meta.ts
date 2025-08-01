@@ -9,7 +9,7 @@ export async function parseMeta(html: string): Promise<Conversation> {
   const $ = cheerio.load(html);
   const styles = $('head style').toString();
   const links = $('head link').toString();
-  const head = `<head>${styles}${links}</head>`;
+  const head = `<head>${styles}${links}<style>[role="button"] {display:none !important}</style></head>`;
   let input = $('div[role="textbox"]');
   let sibling = {length: 0};
   while (!sibling.length) {
