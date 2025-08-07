@@ -66,6 +66,7 @@ export async function POST(req: NextRequest) {
     const formData = await req.formData();
     const file = formData.get('htmlDoc');
     const model = formData.get('model')?.toString() ?? 'ChatGPT';
+    const bypass_scraping = formData.get('bypass_scraping') === 'true';
 
     // Validate input
     if (!(file instanceof Blob)) {
@@ -74,11 +75,20 @@ export async function POST(req: NextRequest) {
 
     // Parse the conversation from HTML
     const html = await file.text();
-    const conversation = await parseHtmlToConversation(html, model);
-
+    let conversation;
+    console.log(`Processing conversation for model: ${model}, bypass scraping: ${bypass_scraping}`);
+    if (bypass_scraping) {
+      conversation = {
+        model,
+        content: html,
+        scrapedAt: new Date().toISOString(),
+        sourceHtmlBytes: html.length,
+      };
+    } else {
+      conversation = await parseHtmlToConversation(html, model);
+    }
     // Generate a unique ID for the conversation
     const conversationId = randomUUID();
-
     // Store only the conversation content in S3
     const contentKey = await s3Client.storeConversation(conversationId, conversation.content);
 
