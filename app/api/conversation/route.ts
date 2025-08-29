@@ -76,7 +76,6 @@ export async function POST(req: NextRequest) {
     // Parse the conversation from HTML
     const html = await file.text();
     let conversation;
-    console.log(`Processing conversation for model: ${model}, bypass scraping: ${bypass_scraping}`);
     if (bypass_scraping) {
       conversation = {
         model,
